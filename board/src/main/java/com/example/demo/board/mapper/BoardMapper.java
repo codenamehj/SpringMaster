@@ -9,4 +9,7 @@ import com.example.demo.board.BoardVO;
 @Mapper
 public interface BoardMapper {
 	List<BoardVO> getBoardList(BoardVO vo);
+	BoardVO getBoardInfo(int boardNo);
+	int insertBoard(BoardVO vo);
+	int deleteBoard(int boardNo);
 }

@@ -5,13 +5,13 @@
 	<sql id="condition">
 		<where>
 			<if test="title != null">
-				title = #{title}
+				title like '%'||#{title}||'%'
 			</if>
 			<if test="content != null">
-				AND content = #{content}
+				AND content like '%'||#{content}||'%'
 			</if>
 			<if test="writer != null">
-				AND writer = #{writer}
+				AND writer like '%'||#{writer}||'%'
 			</if>
 		</where>
 	</sql>
@@ -33,5 +33,46 @@
 		) a WHERE rownum <![CDATA[<= #{end} ) b      WHERE rn >= #{start}]]>
 	</select>
 
-
+	<select id="getBoardInfo" parameterType="int" resultType="BoardVO">
+		SELECT BOARD_NO
+			 , TITLE
+			 , CONTENT
+			 , WRITER
+			 , WRITE_DATE
+			 , CLICK_CNT
+			 , IMAGE
+		  FROM board
+		 WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	<insert id="insertBoard" parameterType="BoardVO">
+		<selectKey keyProperty="boardNo" 
+				   order="BEFORE"
+				   resultType="int">
+			select BOARD_SEQ.nextval from dual
+		</selectKey>
+		INSERT INTO board(
+				BOARD_NO
+			  , TITLE
+			  , CONTENT
+			  , WRITER
+			  , WRITE_DATE
+			  , CLICK_CNT
+			  , IMAGE 
+		)
+		VALUES(
+			  #{boardNo}
+			, #{title}
+			, #{content}
+			, #{writer}
+			, #{writeDate}
+			, #{clickCnt}
+			, #{image}
+		)
+	</insert>
+	
+	<delete id="deleteBoard" parameterType="int">
+		DELETE FROM board
+		WHERE board_no = #{boardNo}
+	</delete>
 </mapper>
