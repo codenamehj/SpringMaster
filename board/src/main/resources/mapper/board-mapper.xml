@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.board.mapper.BoardMapper">
+	<sql id="condition">
+		<where>
+			<if test="title != null">
+				title = #{title}
+			</if>
+			<if test="content != null">
+				AND content = #{content}
+			</if>
+			<if test="writer != null">
+				AND writer = #{writer}
+			</if>
+		</where>
+	</sql>
+	
+	<select id="getBoardList" resultType="boardVO">
+		SELECT * FROM (SELECT rownum as rn, a.* FROM(
+		
+			SELECT BOARD_NO
+				 , TITLE
+				 , CONTENT
+				 , WRITER
+				 , WRITE_DATE
+				 , CLICK_CNT
+				 , IMAGE
+			  FROM board
+		<include refid="condition"></include>
+			ORDER BY BOARD_NO
+		
+		) a WHERE rownum <![CDATA[<= #{end} ) b      WHERE rn >= #{start}]]>
+	</select>
+
+
+</mapper>
