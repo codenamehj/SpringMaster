@@ -75,4 +75,17 @@
 		DELETE FROM board
 		WHERE board_no = #{boardNo}
 	</delete>
+	
+	<update id="updateBoard" parameterType="BoardVO">
+		UPDATE board
+			<set>
+				<if test="title != null">
+					title = #{title}
+				</if>
+				<if test="content != null">
+					, content = #{content}
+				</if>
+			</set>
+		 WHERE board_no = #{boardNo}
+	</update>
 </mapper>
