@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>info.html</title>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>사원번호</th>
+			<td>[[${empInfo.employeeId}]]</td>
+		</tr>
+		<tr>
+			<th>이름</th>
+			<td>[[${empInfo.lastName}]]</td>
+		</tr>
+		<tr>
+			<th>고용일</th>
+			<td>[[${empInfo.hireDate}]]</td>
+		</tr>
+		<tr>
+			<th>사진</th>
+			<td>[[${empInfo.photo}]]</td>
+		</tr>
+	</table>
+	<form action="/emp/delete"> 
+	   <input type="hidden" name="employeeId" th:value="${empInfo.employeeId}">
+		<button>삭제</button>
+	</form>
+</body>
+</html>
