@@ -48,13 +48,28 @@ public class EmpController {
 	}
 
 	// 수정페이지 이동
-	@GetMapping("/emp/update")
-	public void update() {
-
+	@GetMapping("/emp/update/{employeeId}")
+	public String update(@PathVariable("employeeId") int employeeId, Model model) {
+		model.addAttribute("empInfo", mapper.getEmpInfo(employeeId));
+		return "emp/update";
 	}
 
 	// 수정처리
-
+	@PostMapping("/update")
+	public String updateInfo(@ModelAttribute("emp") EmpVO vo, MultipartFile photoFile)
+			throws IllegalStateException, IOException {
+		System.out.println(vo);
+		if (photoFile != null) {
+			// 파일 생성
+			File file = new File("d:/upload", photoFile.getOriginalFilename());
+			// 파일 저장
+			photoFile.transferTo(file);
+			vo.setPhoto(photoFile.getOriginalFilename());
+		}
+		mapper.updateEmp(vo);
+		return "redirect:/emp/list";
+	}
+	
 	// 삭제처리
 	@RequestMapping("/emp/delete")
 	public String delete(@RequestParam(name = "employeeId") int employeeId) {

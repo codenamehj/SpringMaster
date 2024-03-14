@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>info.html</title>
@@ -23,8 +23,9 @@
 			<td>[[${empInfo.photo}]]</td>
 		</tr>
 	</table>
-	<form action="/emp/delete"> 
-	   <input type="hidden" name="employeeId" th:value="${empInfo.employeeId}">
+	<form action="/emp/delete">
+		<input type="hidden" name="employeeId"
+			th:value="${empInfo.employeeId}">
 		<button>삭제</button>
 	</form>
 </body>

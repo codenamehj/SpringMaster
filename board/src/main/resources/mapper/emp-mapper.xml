@@ -106,4 +106,26 @@
 		 WHERE e.department_id IS NOT NULL
 		GROUP BY e.department_id, d.department_name
 	</select>
+	
+	<update id="updateEmp" parameterType="EmpVO">
+		UPDATE employees
+		<set>
+			<if test="lastName != null">
+				last_name = #{lastName}
+			</if>
+			<if test="jobId != null">
+				, job_id = #{jobId}
+			</if>
+			<if test="hireDate != null">
+				, hire_date = #{hireDate}
+			</if>
+			<if test="email != null">
+				, email = #{email}
+			</if>
+			<if test="photo != null">
+				, photo = #{photo}
+			</if>
+		</set>
+		WHERE employee_id = #{emmployeeId}
+	</update>
 </mapper>
