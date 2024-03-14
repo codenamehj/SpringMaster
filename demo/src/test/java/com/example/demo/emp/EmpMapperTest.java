@@ -15,7 +15,7 @@ public class EmpMapperTest {
 	@Autowired
 	EmpMapper mapper;
 
-//	@Test
+	@Test
 	public void 사원통계() {
 		List<Map<String, Object>> list = mapper.getStat();
 		// for departmentId cnt 만 출력
@@ -26,13 +26,13 @@ public class EmpMapperTest {
 		;
 	}
 
-//	@Test
+	@Test
 	public void 사원삭제() {
 		int result = mapper.deleteEmp(211);
 		System.out.println("삭제건수 = " + result);
 	}
 
-//	@Test
+	@Test
 	public void 사원등록() {
 		// vo 객체 생성
 		// 값을 담고
@@ -69,7 +69,7 @@ public class EmpMapperTest {
 	}
 //		assertEquals(list);
 
-//	@Test
+	@Test
 	public void 사원단건조회() {
 		int employeeId = 100;
 		EmpVO vo = mapper.getEmpInfo(employeeId);

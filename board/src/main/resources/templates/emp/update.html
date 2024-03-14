@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h2>사원수정</h2>
+	<form action="/insert" method="post">
+		<label>employee_id</label><input name="employeeId" readonly>
+		<br>
+		<label>last_name</label> <input name="lastName"> <br>
+		<label>jobId</label><br> <select name="jobId">
+			<option value="IT_PROG">Programmer</option>
+			<option value="ST_MAN">Stock Manager</option>
+		</select> <br>
+		<label>이메일</label><br> <input name="email"> <br>
+		<label>사진</label> <input name="photo" type="file"><br>
+		<div>
+			<button>등록</button>
+		</div>
+	</form>
+</body>
+
+</html>

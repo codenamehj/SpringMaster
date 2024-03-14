@@ -2,6 +2,7 @@
  <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.emp.mapper.EmpMapper">
+
 	<sql id="condition">
 		<where>
 			<if test="vo.departmentId != null">
@@ -43,9 +44,10 @@
 				 , COMMISSION_PCT
 				 , MANAGER_ID
 				 , DEPARTMENT_ID
+				 , PHOTO
 			FROM employees e
 		<include refid="condition"></include>
-		ORDER BY first_name
+		ORDER BY employee_id DESC
 
 		) a WHERE rownum <![CDATA[<= #{svo.end} ) b      WHERE rn >= #{svo.start}]]>
 
@@ -72,7 +74,9 @@
 			, JOB_ID
 			<if test="salary != null">, SALARY</if>
 			, MANAGER_ID
-			, DEPARTMENT_ID)
+			, DEPARTMENT_ID
+			, PHONE_NUMBER
+			, PHOTO)
 		VALUES (
 			  #{employeeId}
 			, #{firstName}
@@ -83,6 +87,8 @@
 			<if test="salary != null">, #{salary}</if>
 			, #{managerId}
 			, #{departmentId}
+			, #{phone}
+			, #{photo}
 		)
 	</insert>
 

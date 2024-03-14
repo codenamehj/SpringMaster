@@ -18,11 +18,13 @@ public class EmpVO {
 	String firstName;
 	String lastName;
 	String email;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	Date hireDate;
 	Integer salary;
 	String jobId;
 	String departmentId;
 	String managerId;
 	String phone;
+
+	String photo;
 }

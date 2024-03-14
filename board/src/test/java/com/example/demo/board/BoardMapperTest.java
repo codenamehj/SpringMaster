@@ -50,7 +50,7 @@ public class BoardMapperTest {
 	
 	@Test
 	public void 게시글수정() {
-		BoardVO vo = BoardVO.builder().boardNo(42).title("집에 갈래").content("가즈아~~!!").build();
+		BoardVO vo = BoardVO.builder().boardNo(62).title("예담학원").content("가즈아~~!!").build();
 		int result = mapper.updateBoard(vo);
 		
 		System.out.println("수정된 게시글 수 : " + result);
