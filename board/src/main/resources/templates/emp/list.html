@@ -17,7 +17,7 @@
 			<td th:text="${emp.employeeId}"></td>
 			<td th:text="${emp.firstName}"></td>
 			<td th:text="${emp.lastName}"></td>
-			<td th:text="${emp.hireDate}"></td>
+			<td th:text="${#dates.format(emp.hireDate, 'yyyy-MM-dd')}"></td>
 			<td th:text="${emp.photo}"></td>
 		</tr>
 	</table>

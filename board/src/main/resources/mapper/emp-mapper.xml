@@ -126,6 +126,6 @@
 				, photo = #{photo}
 			</if>
 		</set>
-		WHERE employee_id = #{emmployeeId}
+		WHERE employee_id = #{employeeId}
 	</update>
 </mapper>

@@ -13,7 +13,7 @@
 			<option value="IT_PROG">Programmer</option>
 			<option value="ST_MAN">Stock Manager</option>
 		</select> <br> <label>입사일</label> <input type="text" name="hireDate"
-			value="2024-03-14"><br> <label>이메일</label> <input
+			th:value="${#dates.format(empInfo.hireDate, 'yyyy-MM-dd')}"><br> <label>이메일</label> <input
 			name="email" th:value="${empInfo.email}"> <br> <label>사진</label> <input
 			name="photoFile" type="file"><br>
 		<div>

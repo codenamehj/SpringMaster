@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.emp.EmpVO;
+import com.example.demo.emp.SearchVO;
 import com.example.demo.emp.mapper.EmpMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -39,12 +41,25 @@ public class EmpController {
 		return "result";
 	}
 
+	@GetMapping("/update/{empId}")
+	public String update(@PathVariable int empId) {
+		System.out.println(empId);
+		return "index";
+	}
+
+	@GetMapping("/delete")
+	public String delete(int employeeId, String name) {
+		System.out.println(employeeId + name);
+		return "index";
+	}
+
 	@RequestMapping("/empList")
-	public String empList(Model model) {
-		model.addAttribute("empList", mapper.getEmpList(null, null));
+	public String empList(Model model, EmpVO vo, SearchVO svo) {
+		model.addAttribute("companyName", "<i><font color='green'>예담주식회사</font></i>");
+		model.addAttribute("empList", mapper.getEmpList(vo, svo));
 		return "empList";
 	}
-	
+
 	@PostMapping("/insert3")
 	public String insert3(EmpVO vo, RedirectAttributes rttr) {
 		System.out.println("등록 : " + vo);

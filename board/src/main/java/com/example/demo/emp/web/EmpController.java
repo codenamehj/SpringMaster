@@ -59,7 +59,7 @@ public class EmpController {
 	public String updateInfo(@ModelAttribute("emp") EmpVO vo, MultipartFile photoFile)
 			throws IllegalStateException, IOException {
 		System.out.println(vo);
-		if (photoFile != null) {
+		if (photoFile != null && photoFile.getSize()>0) {
 			// 파일 생성
 			File file = new File("d:/upload", photoFile.getOriginalFilename());
 			// 파일 저장

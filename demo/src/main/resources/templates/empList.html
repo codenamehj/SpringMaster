@@ -1,22 +1,67 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
 <head>
 <meta charset="UTF-8">
 <title>empList.html</title>
+<style>
+.firstRow {
+	color: red;
+}
+
+.oddRow {
+	color: blue;
+}
+
+.backColor {
+	background-color: yellowgreen;
+}
+</style>
 </head>
 <body>
-	<table>
-		<tr>
-			<th>employee_id</th>
-			<th>first_name</th>
-			<th>last_name</th>
-		</tr>
-		<tr th:each="emp : ${empList}">
-			<td th:text="${emp.employeeId}"></td>
-			<td th:text="${emp.firstName}"></td>
-			<td th:text="${emp.lastName}"></td>
-			<td th:text="${emp.hireDate}"></td>
-		</tr>
-	</table>
+	<div layout:fragment="content">
+		사원수 <span th:text="${#lists.size(empList)}">10</span>명 <br> 회사명 <span
+			th:utext="${companyName}">ㅇㅇ</span>
+		<table>
+			<tr>
+				<th>No</th>
+				<th>employee_id</th>
+				<th>name</th>
+				<th>hire_date</th>
+				<th>salary</th>
+				<th>bonus</th>
+				<th>수정/삭제</th>
+			</tr>
+			<tr th:each="emp,stat : ${empList}" class="backColor"
+				th:classappend="${stat.first?'firstRow':stat.odd? 'oddRow':_}">
+				<td th:text="${stat.count}">1</td>
+				<td th:text="${emp.employeeId}">100</td>
+
+				<td th:text="${emp.firstName}+' '+${emp.lastName}">길동</td>
+				<!--/*  	<td th:text="|${emp.firstName} ${emp.lastName}|">길동</td>
+			<td>[[${emp.firstName}]] [[${emp.lastName}]]</td>	*/-->
+
+				<td th:text="${#dates.format(emp.hireDate, 'yyyy-MM-dd')}">2010-10-10</td>
+				<!--/*		<td th:text="${#numbers.formatInteger(emp.salary,3,'COMMA')}">2,000</td>	*/-->
+				<td th:text="${#numbers.formatCurrency(emp.salary)}">2,000</td>
+				<td>
+					<button th:if="${emp.salary}<=10000">신청</button>
+					<button th:unless="${emp.salary}<=10000">신청불가</button>
+				</td>
+				<td>
+					<!-- localhost:8081/update/100 --> <a
+					th:href="@{/update/{id}(id=${emp.employeeId})}">수정</a> <!-- localhost:8081/delete?employeeId=100 -->
+					<a
+					th:href="@{/delete(employeeId=${emp.employeeId},name=${emp.firstName})}">삭제</a>
+				</td>
+			</tr>
+		</table>
+		<div class="footerSector" th:insert="~{layout/footer :: copy}">여기에 삽입</div>
+	</div>
+	<script th:inline="javascript">
+		let emplist = [[${empList}]]
+		console.log(emplist[0].firstName)
+	</script>
 </body>
 </html>
