@@ -11,12 +11,15 @@
 	</select>
 	
 	<insert id="insertReply">
+	<selectKey keyProperty="rno" order="BEFORE" resultType="long">
+			select seq_reply.nextval from dual
+	</selectKey>
 		INSERT INTO reply(rno,
 						  bno,
 						  reply,
 						  replyer
 						 )
-		VALUES(seq_reply.nextval, #{bno}, #{reply}, #{replyer})
+		VALUES(#{rno}, #{bno}, #{reply}, #{replyer})
 	</insert>
 	
 	<delete id="deleteReply">

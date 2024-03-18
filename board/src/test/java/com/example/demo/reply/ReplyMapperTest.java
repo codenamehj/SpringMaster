@@ -14,7 +14,7 @@ public class ReplyMapperTest {
 
 	@Test
 	public void 댓글등록() {
-		ReplyVO vo = ReplyVO.builder().bno((long) 1).reply("수청을 들라.").replyer("변사또").build();
+		ReplyVO vo = ReplyVO.builder().bno((long) 1).reply("몽룡도련님..").replyer("성춘향").build();
 		int result = mapper.insertReply(vo);
 
 		System.out.println("등록된 게시판 번호 : " + vo.getRno());
