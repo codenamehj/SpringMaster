@@ -12,6 +12,8 @@ public interface ReplyMapper {
 	int insertReply(ReplyVO vo);
 	// 특정 게시판 댓글 리스트
 	List<ReplyVO> getReply(Long bno);
+	// 특정 댓글 정보
+	ReplyVO getReplyInfo(Long rno);	
 	// 댓글 삭제
 	int deleteReply(Long rno);
 	// 댓글 수정

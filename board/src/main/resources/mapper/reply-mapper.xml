@@ -10,6 +10,12 @@
 		ORDER BY rno
 	</select>
 	
+	<select id="getReplyInfo" resultType="ReplyVO">
+		SELECT *
+		FROM reply
+		WHERE rno = #{rno}
+	</select>
+	
 	<insert id="insertReply">
 	<selectKey keyProperty="rno" order="BEFORE" resultType="long">
 			select seq_reply.nextval from dual
@@ -29,7 +35,7 @@
 	
 	<update id="updateReply">
 		UPDATE reply
-		SET reply = #{reply}, updateDate = sysdate
+		SET reply = #{reply}, replyer = #{replyer}, updateDate = sysdate
 		WHERE rno = #{rno}
 	</update>
 </mapper>

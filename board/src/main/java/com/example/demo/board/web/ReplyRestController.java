@@ -1,8 +1,10 @@
 package com.example.demo.board.web;
 
+import java.io.Console;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +25,7 @@ public class ReplyRestController {
 
 	@RequestMapping("/replyMng")
 	public ModelAndView replyMng() { // @RestController 사용 시 ModelAndView로 페이지 이동.
-		ModelAndView mv = new ModelAndView("replyMng");
+		ModelAndView mv = new ModelAndView("/board/replyMng");
 		return mv;
 	}
 
@@ -35,6 +37,22 @@ public class ReplyRestController {
 	@PostMapping("/replies/insert")
 	public ReplyVO save(ReplyVO vo) {
 		mapper.insertReply(vo);
+		return vo;
+	}
+	
+	@GetMapping("/replies/{rno}")
+	public ReplyVO info(@PathVariable Long rno) {
+		return mapper.getReplyInfo(rno);
+	}
+	
+	@RequestMapping("/replies/remove/{rno}")
+	public int delete(@PathVariable Long rno) {
+		return mapper.deleteReply(rno);
+	}
+	
+	@PostMapping("/replies/update")
+	public ReplyVO update(ReplyVO vo) {
+		mapper.updateReply(vo);
 		return vo;
 	}
 }

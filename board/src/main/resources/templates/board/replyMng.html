@@ -25,10 +25,117 @@
 					<td>scott</td>
 					<td>2023-10-10</td>
 					<td>2023-12-05</td>
-					<td><button type="button" onclick="remove(100)">삭제</button></td>
+					<td><button type="button" onclick="update(100)">수정</button>
+						<button type="button" onclick="remove(100)">삭제</button></td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
+	<h3>댓글(등록,수정)</h3>
+	<form method="post" name="frm">
+		<label>reply</label><input name="reply"><br> 
+		<label>replyer</label><input name="replyer"><br> 
+		<input type="hidden" name="bno"	value="1">
+		<div>
+			<button type="button" onclick="saveReq()">등록</button>
+			<button type="button" onclick="updateReq()">수정</button>
+		</div>
+	</form>
+
+	<script>
+		listReq()
+		
+		function dateFormat(dt){
+			let	date = new Date(dt);
+			let result = date.getFullYear() + '-' + ((date.getMonth()+1) <= 9 ? "0" + (date.getMonth()+1) : (date.getMonth()+1))
+						+ '-' + (date.getDate() <= 9 ? "0" + date.getDate() : date.getDate());
+			return result;				
+		}
+		
+		// 리스트 요청
+		function listReq(){
+			let bno = 1;
+			fetch("/replyList/" + bno)
+				.then(res => res.json())
+				.then(res => listRes(res))
+		} 
+		
+		// 리스트 응답
+		function listRes(res){
+			replylist.innerHTML = '';
+			let i = 0;
+			for (obj of res){
+				let newTag = `
+				<tr>
+					<td>${++i}</td>
+					<td>${obj.reply}</td>
+					<td>${obj.replyer}</td>
+					<td>${dateFormat(obj.replyDate)}</td>
+					<td>${dateFormat(obj.updateDate)}</td>
+					<td><button type="button" onclick="infoReq(${obj.rno})">수정</button><button type="button" onclick="deleteReq(${obj.rno})">삭제</button></td>
+				</tr>
+				`
+				replylist.innerHTML += newTag;
+			}
+		}
+		
+		// 등록 요청
+		function saveReq(){
+			let param = new FormData(document.frm);
+			fetch("/replies/insert",{
+				method : "post",
+				body : param
+			})
+			.then(res => res.json())
+			.then(res => saveRes(res))
+		}
+		
+		// 등록 응답
+		function saveRes(res){
+			listReq();
+			frm.reply.value = "";
+			frm.replyer.value = "";
+		}
+		
+		// 수정 입력 요청
+		function infoReq(rno){
+			fetch(`/replies/${rno}`)
+				.then(res => res.json())
+				.then(res => infoRes(res))
+		}
+		
+		// 수정 입력 응답
+		function infoRes(res){
+			frm.reply.value = res.reply;
+			frm.replyer.value = res.replyer;
+			console.log(res.rno);
+		}
+		
+		// 삭제 요청
+		function deleteReq(rno){
+			fetch(`/replies/remove/${rno}`)
+				.then(res => res.json())
+				.then(res => deleteRes(res))
+		}
+		
+		// 삭제 응답
+		function deleteRes(res){
+			listReq();
+		}
+		
+		// 수정 요청
+		function updateReq(){
+			fetch(`/replies/update`)
+				.then(res => res.json())
+				.then(res => updateRes(res))
+		}
+		
+		// 수정 응답
+		function updateRes(res){
+			listReq();
+			frm.reply.value = "";
+			frm.replyer.value = "";
+		}
+	</script>
 </body>
 </html>
