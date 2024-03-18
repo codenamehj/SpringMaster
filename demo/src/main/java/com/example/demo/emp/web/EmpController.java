@@ -21,6 +21,7 @@ import com.example.demo.emp.EmpVO;
 import com.example.demo.emp.SearchVO;
 import com.example.demo.emp.mapper.EmpMapper;
 
+import common.Paging;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -41,6 +42,12 @@ public class EmpController {
 		return "result";
 	}
 
+	@GetMapping("/info/{empId}")
+	public String info(@PathVariable int empId, Model model) {
+		model.addAttribute("emp", mapper.getEmpInfo(empId));
+		return "empInfo";
+	}
+	
 	@GetMapping("/update/{empId}")
 	public String update(@PathVariable int empId) {
 		System.out.println(empId);
@@ -54,8 +61,17 @@ public class EmpController {
 	}
 
 	@RequestMapping("/empList")
-	public String empList(Model model, EmpVO vo, SearchVO svo) {
-		model.addAttribute("companyName", "<i><font color='green'>예담주식회사</font></i>");
+	public String empList(Model model, EmpVO vo, SearchVO svo, Paging pvo) {
+//		model.addAttribute("companyName", "<i><font color='green'>예담주식회사</font></i>");
+		// 페이징 처리
+		pvo.setPageUnit(5); // 데이터 수
+		pvo.setPageSize(3); // 페이지 번호 수
+		svo.setStart(pvo.getFirst());
+		svo.setEnd(pvo.getLast());
+		pvo.setTotalRecord(mapper.getCount(vo, svo));
+		model.addAttribute("paging", pvo);
+		
+		// 목록 조회
 		model.addAttribute("empList", mapper.getEmpList(vo, svo));
 		return "empList";
 	}
