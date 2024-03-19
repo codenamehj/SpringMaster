@@ -21,13 +21,13 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		사원수 <span th:text="${#lists.size(empList)}">10</span>명 <br> 회사명 <span
-			th:utext="${companyName}">ㅇㅇ</span>
+		사원수 <span th:text="${#lists.size(empList)}">10</span>명 <br> 
+		회사명 <span th:utext="${companyName}">ㅇㅇ</span>
 
 		<!-- 검색폼 시작 -->
 		<form name="frmSearch" th:object="${empVO}" action="">
-			<input type="hidden" name="page"> <select name="departmentId"
-				th:value="*{departmentId}">
+			<input type="hidden" name="page"> 
+			<select name="departmentId"	th:value="*{departmentId}">
 				<option value="">선택
 				<option value="10" th:selected="*{departmentId}=='10'">Administration
 				
@@ -70,10 +70,10 @@
 
 				<td th:text="${#dates.format(emp.hireDate, 'yyyy-MM-dd')}">2010-10-10</td>
 				<!--/*		<td th:text="${#numbers.formatInteger(emp.salary,3,'COMMA')}">2,000</td>	*/-->
-				<td th:text="${#numbers.formatCurrency(emp.salary)}">2,000</td>
+				<td ><span th:if="${emp.salary}!=null" th:text="${#numbers.formatCurrency(emp.salary)}">2,000</span></td>
 				<td>
-					<button th:if="${emp.salary}<=10000">신청</button>
-					<button th:unless="${emp.salary}<=10000">신청불가</button>
+					<button th:if="${emp.salary}!=null and ${emp.salary}<=10000">신청</button>
+					<button th:unless="${emp.salary}!=null and ${emp.salary}<=10000">신청불가</button>
 				</td>
 				<td>
 					<!-- localhost:8081/update/100 --> <!-- <a th:href="@{/update/{id}(id=${emp.employeeId})}">수정</a> -->

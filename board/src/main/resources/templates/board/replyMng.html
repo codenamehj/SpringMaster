@@ -36,6 +36,7 @@
 		<label>reply</label><input name="reply"><br> 
 		<label>replyer</label><input name="replyer"><br> 
 		<input type="hidden" name="bno"	value="1">
+		<input type="hidden" name="rno">
 		<div>
 			<button type="button" onclick="saveReq()">등록</button>
 			<button type="button" onclick="updateReq()">수정</button>
@@ -125,7 +126,11 @@
 		
 		// 수정 요청
 		function updateReq(){
-			fetch(`/replies/update`)
+			let param = new FormData(document.frm);
+			fetch("/replies/update",{
+				method : "post",
+				body : param
+			})
 				.then(res => res.json())
 				.then(res => updateRes(res))
 		}
