@@ -17,7 +17,8 @@ import lombok.Setter;
 @Service
 public class EmpServiceImpl implements EmpService{
 
-	@Setter(onMethod_ = @Autowired)
+//	@Setter(onMethod_ = @Autowired)
+	@Autowired
 	EmpMapper empMapper;
 	
 	@Override

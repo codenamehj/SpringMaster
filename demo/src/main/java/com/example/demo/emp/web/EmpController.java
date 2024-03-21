@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.common.Paging;
 import com.example.demo.emp.EmpVO;
 import com.example.demo.emp.SearchVO;
 import com.example.demo.emp.service.EmpService;
 
-import common.Paging;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -59,19 +59,19 @@ public class EmpController {
 		return new ResponseEntity<>(vo, HttpStatus.OK);
 	}
 
+	@GetMapping("/insert")
+	public void insert() {}
+	
 	@PostMapping("/insert")
-//	@ResponseBody
 	public ModelAndView insert(@ModelAttribute("emp") EmpVO vo) {
 		System.out.println(vo);
-//		mapper.insertEmp(vo);
-		// 커맨드 객체는 model에 추가
-//		model.addAttribute("empVO", vo);
-//		model.addAttribute("insertResult", "success");
-
+		empService.insertEmp(vo);
+		// 커맨드객체는 model에 추가
+		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("result");
+		mv.setViewName("home");
 		mv.addObject("insertResult", "success");
-		mv.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+//		mv.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
 		return mv;
 	}
 
@@ -98,8 +98,8 @@ public class EmpController {
 		return "redirect:empList";
 	}
 
-	@GetMapping("/")
-	public String test() {
-		return "index"; // "/template(기본값-동적 컨텐츠)/index.html"
-	}
+//	@GetMapping("/")
+//	public String test() {
+//		return "index"; // "/template(기본값-동적 컨텐츠)/index.html"
+//	}
 }
