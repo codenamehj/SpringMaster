@@ -10,15 +10,15 @@ import com.sam.app.insa.service.DepartmentsService;
 @Controller
 public class DepartmentsController {
 
-	@Autowired //ì˜ì¡´ì„± ì£¼ì…
+	@Autowired //ÀÇÁ¸¼º ÁÖÀÔ
 	DepartmentsService departmentsService;
 	
-	@GetMapping("/getDepartmentsList") //url //get ëŒ€ì‹  request í•´ë„ ë¨. ê·¸ ì™¸ì— postë„ ìˆìŒ..
+	@GetMapping("/getDepartmentsList") //url //get ´ë½Å request ÇØµµ µÊ. ±× ¿Ü¿¡ postµµ ÀÖÀ½
 	public ModelAndView list() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/insa/departmentsList");
 		mv.addObject("list", departmentsService.getList());
 		
-		return mv; //í™”ë©´ì— ë³´ì—¬ì§€ëŠ” í˜ì´ì§€ê°€ ë¦¬í„´ë¨.
+		return mv; //È­¸é¿¡ º¸¿©Áö´Â ÆäÀÌÁö°¡ ¸®ÅÏµÊ.
 	}
 }

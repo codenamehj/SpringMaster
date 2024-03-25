@@ -16,7 +16,6 @@ public class DepartmentsServiceImpl implements DepartmentsService{
 	
 	@Override
 	public List<DepartmentsVO> getList() {
-		// TODO Auto-generated method stub
 		return departmentsMapper.getList();
 	}
 
