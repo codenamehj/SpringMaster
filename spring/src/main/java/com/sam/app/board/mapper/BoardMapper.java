@@ -10,27 +10,25 @@ import com.sam.app.board.service.BoardVO;
 
 @Mapper
 public interface BoardMapper {
-	
-	
+
 	// 목록조회
-	public List<Map<String, Object>> getBoardList(BoardSearchVO vo) ;
-	
-	//전체레코드 건수 조회
-	public int getCount(BoardSearchVO vo) ;
+	public List<Map<String, Object>> getBoardList(BoardSearchVO vo);
 
-		public List<BoardVO> getBoardList2(BoardVO vo) ;
+	// 전체레코드 건수 조회
+	public int getCount(BoardSearchVO vo);
 
-		// 단건저회
-		public BoardVO getBoard(String seqs);
+	public List<BoardVO> getBoardList2(BoardVO vo);
 
-		// 입력
-		public void insertBoard(BoardVO vo) ;
+	// 단건조회
+	public BoardVO getBoard(String seqs);
 
-		// 수정
-		public void updateBoard(BoardVO vo) ;
+	// 입력
+	public void insertBoard(BoardVO vo);
 
-		// 삭제
-		public void deleteBoard(String seqs) ;
+	// 수정
+	public void updateBoard(BoardVO vo);
 
-		
+	// 삭제
+	public void deleteBoard(String seqs);
+
 }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dbal.app.book.mapper.BookMapper">
+<!-- 전체 조회 -->
+<select id="getBookList" resultType="BookVO">
+	SELECT *
+	FROM book_tbl_06
+</select>
+
+<!-- 도서 정보 등록 -->
+<insert id="insertBook" parameterType="BookVO">
+	<selectKey keyProperty="bookNo" 
+				order="BEFORE"
+				resultType="int">
+		SELECT NVL(MAX(book_no),0) + 1  
+		  FROM book_tbl_06
+	</selectKey>
+	INSERT INTO book_tbl_06
+	VALUES(
+		   #{bookNo},
+		   #{bookName},
+		   #{bookCoverimg}, 
+		   #{bookDate}, 
+		   #{bookPrice}, 
+		   #{bookPublisher}, 
+		   #{bookInfo}
+		   )
+</insert>
+
+<!-- 대여 현황 조회 -->
+<select id="getRentList">
+
+</select>
+
+</mapper>
