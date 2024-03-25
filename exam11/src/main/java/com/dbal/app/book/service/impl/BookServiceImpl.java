@@ -24,4 +24,9 @@ public class BookServiceImpl implements BookService{
 		return bookMapper.getBookList();
 	}
 
+	@Override
+	public List<BookVO> getRentList() {
+		return bookMapper.getRentList();
+	}
+
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,6 +25,14 @@
 			<td>대여총계</td>
 			<td>대여횟수</td>
 		</tr>
+		<c:forEach var="rent" items="${rentlist}">
+			<tr>
+				<td>${rent.bookNo}</td>
+				<td>${rent.bookName}</td>
+				<td>${rent.sum}</td>
+				<td>${rent.cnt}</td>
+			</tr>
+		</c:forEach>
 	</table>
 </body>
 </html>

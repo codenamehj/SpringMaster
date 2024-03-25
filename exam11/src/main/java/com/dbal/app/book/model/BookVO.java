@@ -20,9 +20,7 @@ public class BookVO {
 	private String bookPublisher;
 	private String bookInfo;
 	
-	private Integer rentNo;
-	private Integer rentPrice;
-	private Date rentDate;
-	private String rentStatus;
+	private Integer sum;
+	private Integer cnt;
 	
 }

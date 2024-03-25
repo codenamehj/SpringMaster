@@ -15,7 +15,7 @@ public class BookController {
 	@Autowired
 	BookService bookService;
 
-	@RequestMapping("/index")
+	@RequestMapping("/")
 	public String index() {
 		return "index";
 	}
@@ -28,7 +28,7 @@ public class BookController {
 	
 	@RequestMapping("/rentlist")
 	public String rentlist(Model model) {
-		model.addAttribute("rentlist", bookService.getBookList());
+		model.addAttribute("rentlist", bookService.getRentList());
 		return "book/rentBookList";
 	}
 	

@@ -8,5 +8,5 @@ public interface BookMapper {
 	
 	public int insertBook(BookVO bookVo);
 	public List<BookVO> getBookList();
-	
+	public List<BookVO> getRentList();
 }
