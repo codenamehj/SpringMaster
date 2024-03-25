@@ -13,7 +13,7 @@
 			<li><a href="insert">도서등록</a></li>
 			<li><a href="list">도서목록조회/수정</a></li>
 			<li><a href="rentlist">대여현황조회</a></li>
-			<li><a href="index">홈으로</a></li>
+			<li><a href="/mb">홈으로</a></li>
 		</ul>
 	</nav>
 	<h2>도서 등록</h2>
