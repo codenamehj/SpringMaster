@@ -33,7 +33,8 @@ public class BookController {
 	}
 	
 	@RequestMapping("/insert")
-	public String insertForm() {
+	public String insertForm(Model model) {
+		model.addAttribute("bookNo", bookService.getBookNo());
 		return "book/bookInsert";
 	}
 	

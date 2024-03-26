@@ -22,7 +22,7 @@
 		<table>
 			<tr>
 				<td>도서번호</td>
-				<td><input placeholder="등록하면 자동으로 입력됩니다." type="number" name="bookNo" value="bookNo" readonly></td>
+				<td><input type="number" name="bookNo" value="${bookNo}" readonly></td>
 			</tr>
 			<tr>
 				<td>도서명</td>
@@ -58,26 +58,6 @@
 			if (frm.bookName.value == "") {
 				frm.bookName.focus();
 				alert("도서명이 입력되지 않았습니다.");
-				return false;
-			}else if(frm.bookCoverimg.value == ""){
-				frm.bookCoverimg.focus();
-				alert("도서표지가 입력되지 않았습니다.");
-				return false;
-			}else if(frm.bookDate.value == ""){
-				frm.bookDate.focus();
-				alert("출판일자가 입력되지 않았습니다.");
-				return false;
-			}else if(frm.bookPrice.value == ""){
-				frm.bookPrice.focus();
-				alert("금액이 입력되지 않았습니다.");
-				return false;
-			}else if(frm.bookPublisher.value == ""){
-				frm.bookPublisher.focus();
-				alert("출판사가 입력되지 않았습니다.");
-				return false;
-			}else if(frm.bookInfo.value == ""){
-				frm.bookInfo.focus();
-				alert("도서소개가 입력되지 않았습니다.");
 				return false;
 			}else{
 				alert("도서등록이 완료되었습니다.");

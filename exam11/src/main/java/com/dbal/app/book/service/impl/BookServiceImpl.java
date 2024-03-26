@@ -29,4 +29,9 @@ public class BookServiceImpl implements BookService{
 		return bookMapper.getRentList();
 	}
 
+	@Override
+	public int getBookNo() {
+		return bookMapper.getBookNo();
+	}
+
 }

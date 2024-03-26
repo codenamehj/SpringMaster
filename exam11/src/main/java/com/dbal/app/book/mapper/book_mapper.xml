@@ -8,14 +8,15 @@
 		SELECT *
 		FROM book_tbl_06
 	</select>
-
+	
+	<!-- 책 코드 자동 지정 -->
+	<select id="getBookNo" resultType="int">
+		SELECT NVL(MAX(book_no),0) + 1
+		  FROM book_tbl_06
+	</select>
+	
 	<!-- 도서 정보 등록 -->
 	<insert id="insertBook" parameterType="BookVO">
-		<selectKey keyProperty="bookNo" order="BEFORE"
-			resultType="int">
-			SELECT NVL(MAX(book_no),0) + 1
-			FROM book_tbl_06
-		</selectKey>
 		INSERT INTO book_tbl_06
 		VALUES(
 		#{bookNo},
