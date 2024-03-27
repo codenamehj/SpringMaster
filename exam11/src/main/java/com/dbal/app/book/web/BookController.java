@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.dbal.app.book.model.BookVO;
 import com.dbal.app.book.service.BookService;
 
+import net.sf.json.JSONArray;
+
 @Controller
 public class BookController {
 
@@ -25,19 +27,20 @@ public class BookController {
 		model.addAttribute("list", bookService.getBookList());
 		return "book/bookList";
 	}
-	
+
 	@RequestMapping("/rentlist")
 	public String rentlist(Model model) {
 		model.addAttribute("rentlist", bookService.getRentList());
+		model.addAttribute("rentJsonList", JSONArray.fromObject(bookService.getRentList()));
 		return "book/rentBookList";
 	}
-	
+
 	@RequestMapping("/insert")
 	public String insertForm(Model model) {
 		model.addAttribute("bookNo", bookService.getBookNo());
 		return "book/bookInsert";
 	}
-	
+
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(BookVO bookVO) {
 		bookService.saveBook(bookVO);

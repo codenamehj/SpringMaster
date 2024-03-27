@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link
+	href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css"
+	rel="stylesheet">
+<script type="text/javascript"
+	src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
 </head>
 <body>
 	<h2>도서대여관리</h2>
@@ -18,21 +23,19 @@
 		</ul>
 	</nav>
 	<h2>도서별 대여매출현황</h2>
-	<table border="1">
-		<tr>
-			<td>도서번호</td>
-			<td>도서명</td>
-			<td>대여총계</td>
-			<td>대여횟수</td>
-		</tr>
-		<c:forEach var="rent" items="${rentlist}">
-			<tr>
-				<td>${rent.bookNo}</td>
-				<td>${rent.bookName}</td>
-				<td>${rent.sum}</td>
-				<td>${rent.cnt}</td>
-			</tr>
-		</c:forEach>
-	</table>
+	<div id="result-data"></div>
+	<script type="text/javascript">
+	console.log(${rentJsonList});
+	let resultData = new Tabulator("#result-data",{
+	    layout:"fitDataTable",
+		data:${rentJsonList},
+		columns:[
+			{title:"도서번호", field:"bookNo"},
+			{title:"도서명", field:"bookName"},
+			{title:"대여총계", field:"sum"},
+			{title:"대여횟수", field:"cnt"}
+		],
+	});
+	</script>
 </body>
 </html>
